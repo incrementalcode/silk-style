@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<!-- <base href=""/> -->
+		<title>Silk Style</title>
+		
+		<script language="javascript" src="jquery-1.6.1.js"></script>
+		
+		<script language="javascript" src="silk-style.js"></script>
+		
+		<script language="javascript">
+		
+		/*
+		defining a style where a content div is
+			centered in the page,
+			only stretches as wide as it's content,
+			and is vertically aligned with a top margin that is a 1/4 of the window height (not ideal in most cases, but anyways).
+		*/
+		
+		
+		/* this is a jquery plugin for now, the selector will be used as the CSS rule, call the sss() function to set the CSS declaration for the rule associated with that selector. */
+		
+		$('html.centered').sss({
+
+			/* define properties in here */
+			
+			width: '100%',
+			height: '100%',
+			
+			/* nested rules can be created, when a property starts with / it is assumed to be a sub rule instead of a CSS property. */
+			
+			'/ body' : {
+				height: '100%',
+				textAlign: 'center',
+				background: 'rgb(230,230,230)',
+				
+				'/ #content': {
+					display: 'inline-block',
+					textAlign: 'left',
+					position: 'relative',
+					top: '25%',
+					
+					background: 'rgba(240,240,240,70)',
+					
+					/* the forEach property specifies a function that will be run on all the elements that are currently in the document and match this selector. */
+					
+					forEach: function() {
+						//this.style.top = Math.round(this.parentNode.clientHeight / 4) + 'px';
+					}
+				}
+			}
+		})
+		
+		/* here we choose to actually use this 'centered' style that was defined above, by using standard jquery to select the elements we want to style and add the class,
+			having this functionality directly where we define the style means we are more likely to define styles as modular units that can be swapped out because they do not automatically apply themselves,
+			it also puts the choice of style where it should be (in the CSS instead of the markup).
+		*/
+		
+		$('html').addClass('centered');
+		
+		</script>
+		
+	</head>
+	<body>
+	
+		<div id="content">
+			<h1>How's it look?</h1>
+			<p>This is a test paragraph.</p>
+		</div>
+				
+	</body>
+</html>
